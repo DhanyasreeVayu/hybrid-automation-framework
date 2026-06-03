@@ -1,22 +1,32 @@
 package base;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
+
+import utils.ConfigReader;
 
 public class BaseTest {
 
     public WebDriver driver;
+    ConfigReader config;
 
     @BeforeMethod
-    public void setUp() {
-        driver = new ChromeDriver();
+    public void setup() {
+
+        config = new ConfigReader();
+
+        driver =
+                DriverFactory.getDriver(
+                        config.getBrowser());
+
         driver.manage().window().maximize();
     }
 
     @AfterMethod
     public void tearDown() {
-        driver.quit();
+
+        if(driver != null) {
+            driver.quit();
+        }
     }
 }

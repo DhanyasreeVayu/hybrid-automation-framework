@@ -1,23 +1,28 @@
 package tests;
 
-import base.BaseTest;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import base.BaseTest;
+import pages.LoginPage;
+import utils.TestDataProvider;
+
 public class LoginTest extends BaseTest {
 
-    @Test
-    public void loginTest() {
+    @Test(dataProvider = "loginData",
+          dataProviderClass = TestDataProvider.class)
+    public void verifyLogin(String username,
+                            String password) {
 
         driver.get("https://www.saucedemo.com/");
 
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.id("password")).sendKeys("secret_sauce");
-        driver.findElement(By.id("login-button")).click();
+        LoginPage login =
+                new LoginPage(driver);
 
-        String url = driver.getCurrentUrl();
+        login.login(username, password);
 
-        Assert.assertTrue(url.contains("inventory"));
+        Assert.assertTrue(
+                driver.getCurrentUrl()
+                        .contains("inventory"));
     }
 }
