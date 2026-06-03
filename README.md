@@ -1,15 +1,20 @@
 # Hybrid Automation Framework
 
-## Tech Stack
+## Technologies
+- Java
 - Selenium WebDriver
 - REST Assured
 - TestNG
-- Java
+- Extent Reports
+- Maven
 
-## Features
+## Framework Features
 - UI Automation
 - API Automation
-- Hybrid Testing Approach
+- Page Object Model
+- Reporting
+- Screenshot Capture
+- Config Management
 
-## How to Run
-- mvn test
+## Execution
+mvn test
